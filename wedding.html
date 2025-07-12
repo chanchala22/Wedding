@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Riya & Arjun's Wedding</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --blush: #F8D7D0;
+            --soft-gold: #E8C07D;
+            --navy: #1E2A47;
+            --ivory: #FFFFF7;
+            --dusty-rose: #D4A5A5;
+        }
+        
+        /* Base Styles with Mobile First Approach */
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Playfair Display', serif;
+            background-color: var(--ivory);
+            color: var(--navy);
+            overflow-x: hidden;
+            line-height: 1.6;
+            transition: background-color 0.5s ease;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        /* Landing Page Styles */
+        #landing-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--ivory) 0%, var(--blush) 100%);
+            padding: 20px;
+        }
+        
+        .landing-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            color: var(--navy);
+            margin-bottom: 15px;
+            animation: fadeInDown 1.5s ease;
+        }
+        
+        .couple-names {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 6vw, 3rem);
+            margin-bottom: 30px;
+            color: var(--navy);
+            animation: fadeIn 2s ease;
+        }
+        
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .btn-landing {
+            display: inline-block;
+            padding: 12px 30px;
+            background: transparent;
+            color: var(--navy);
+            border: 2px solid var(--navy);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            animation: fadeInUp 1s ease;
+            width: 100%;
+        }
+        
+        .btn-landing:active {
+            transform: translateY(2px);
+        }
+        
+        /* Invitation Page Styles */
+        #invitation-page {
+            display: none;
+        }
+        
+        .parallax {
+            background-attachment: scroll;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        @media (min-width: 768px) {
+            .parallax {
+                background-attachment: fixed;
+            }
+        }
+        
+        .header {
+            background-image: url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            text-align: center;
+            color: white;
+            z-index: 1;
+        }
+        
+        .couple-names-header {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2.5rem, 10vw, 5.5rem);
+            margin-bottom: 1rem;
+            color: var(--ivory);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+            animation: fadeIn 1.5s ease;
+            padding: 0 15px;
+        }
+        
+        .wedding-date {
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            color: var(--ivory);
+            font-weight: 300;
+            animation: fadeIn 2s ease;
+            padding: 0 15px;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            padding: 0 15px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .countdown-item {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(5px);
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            min-width: 70px;
+            border: 1px solid var(--soft-gold);
+        }
+        
+        .countdown-number {
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
+            font-weight: 400;
+            color: var(--ivory);
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .countdown-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--ivory);
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .section {
+            padding: 3rem 5%;
+            text-align: center;
+        }
+        
+        @media (min-width: 768px) {
+            .section {
+                padding: 6rem 10%;
+            }
+        }
+        
+        .section-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            color: var(--navy);
+            margin-bottom: 2rem;
+            position: relative;
+            font-weight: normal;
+            animation: fadeIn 1s ease;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(to right, var(--soft-gold), var(--dusty-rose));
+            margin: 1.5rem auto;
+            animation: scaleIn 1s ease;
+        }
+        
+        .event-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem auto;
+            max-width: 600px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--blush);
+            animation: fadeInUp 1s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .event-card {
+                padding: 2.5rem;
+                margin: 2rem auto;
+                box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            }
+        }
+        
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--soft-gold), var(--dusty-rose));
+            animation: heightIn 1s ease;
+        }
+        
+        .event-name {
+            font-size: clamp(1.5rem, 5vw, 1.8rem);
+            color: var(--navy);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .event-details {
+            margin-bottom: 1.5rem;
+            color: #555;
+            font-size: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .event-details {
+                font-size: 1.1rem;
+            }
+        }
+        
+        .event-time, .event-venue {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 0.6rem 0;
+            color: var(--navy);
+            font-size: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .event-with-photos {
+            margin-bottom: 4rem;
+        }
+        
+        @media (min-width: 768px) {
+            .event-with-photos {
+                margin-bottom: 6rem;
+            }
+        }
+        
+        .event-photos-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(1.8rem, 6vw, 2.2rem);
+            color: var(--navy);
+            margin: 3rem 0 1.5rem;
+            text-align: center;
+            font-weight: normal;
+            animation: fadeIn 1s ease;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        @media (min-width: 480px) {
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1.5rem;
+                margin-top: 2rem;
+            }
+        }
+        
+        .gallery-item {
+            height: 180px;
+            overflow: hidden;
+            border-radius: 8px;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            animation: zoomIn 0.5s ease;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+        
+        @media (min-width: 480px) {
+            .gallery-item {
+                height: 200px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .gallery-item {
+                height: 240px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            }
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin: 2rem 0;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            animation: fadeInUp 1s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .video-container {
+                margin: 3rem 0;
+                border-radius: 12px;
+                box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            }
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .greetings {
+            background: linear-gradient(135deg, var(--blush) 0%, var(--ivory) 100%);
+            padding: 3rem 5%;
+            text-align: center;
+            color: var(--navy);
+            animation: fadeIn 1s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .greetings {
+                padding: 5rem 10%;
+            }
+        }
+        
+        .greetings-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2rem, 6vw, 3rem);
+            color: var(--navy);
+            margin-bottom: 2rem;
+            font-weight: normal;
+        }
+        
+        .greetings-message {
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            font-size: 1rem;
+            line-height: 1.7;
+            animation: fadeInUp 1s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .greetings-message {
+                font-size: 1.1rem;
+                margin-bottom: 3.5rem;
+            }
+        }
+        
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 16px;
+            color: var(--dusty-rose);
+            animation: float 6s ease-in infinite;
+            opacity: 0;
+        }
+        
+        @media (min-width: 768px) {
+            .heart {
+                font-size: 18px;
+            }
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background: transparent;
+            color: var(--ivory);
+            border: 1px solid var(--ivory);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 1px;
+            font-weight: 400;
+            animation: fadeInUp 1s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .btn {
+                padding: 12px 32px;
+                font-size: 1rem;
+            }
+        }
+        
+        .btn-dark {
+            color: var(--navy);
+            border-color: var(--navy);
+            margin-top: 1rem;
+        }
+        
+        .back-btn-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        @media (min-width: 768px) {
+            .back-btn-container {
+                margin: 40px 0;
+            }
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background: var(--navy);
+            color: var(--ivory);
+            border: none;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            animation: fadeInUp 1s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .back-btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+        }
+        
+        footer {
+            background: var(--navy);
+            color: var(--ivory);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.8rem;
+            font-family: 'Montserrat', sans-serif;
+            animation: fadeInUp 1s ease;
+        }
+        
+        @media (min-width: 768px) {
+            footer {
+                padding: 3rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes heightIn {
+            from { height: 0; }
+            to { height: 100%; }
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+        
+        @keyframes photoEntrance {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes videoFloat {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        
+        /* Touchscreen optimizations */
+        @media (hover: none) {
+            .btn-landing:active, 
+            .btn:active, 
+            .back-btn:active {
+                transform: scale(0.98);
+            }
+            
+            .event-card:active {
+                transform: translateY(-2px);
+            }
+            
+            .gallery-item:active img {
+                transform: scale(1.05);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts Animation -->
+    <div class="floating-hearts" id="hearts-container"></div>
+    
+    <!-- Landing Page -->
+    <div id="landing-page">
+        <div class="container">
+            <h1 class="landing-title">Wedding Invitation</h1>
+            <div class="couple-names">Riya & Arjun</div>
+            <div class="button-container">
+                <button id="bride-btn" class="btn-landing">Bride's Invitation</button>
+                <button id="groom-btn" class="btn-landing">Groom's Invitation</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Invitation Page -->
+    <div id="invitation-page">
+        <!-- Header with Parallax Effect -->
+        <div class="parallax header">
+            <div class="header-content animate__animated animate__fadeIn">
+                <h1 class="couple-names-header" id="dynamic-names">Riya & Arjun</h1>
+                <p class="wedding-date">December 12, 2023</p>
+                <div class="countdown">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days">00</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours">00</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes">00</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds">00</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
+                </div>
+                <a href="#events" class="btn">View Events</a>
+            </div>
+        </div>
+        
+        <!-- Events Section -->
+        <section class="section" id="events">
+            <h2 class="section-title">Our Wedding Events</h2>
+            
+            <!-- Haldi Ceremony with Photos -->
+            <div class="event-with-photos">
+                <div class="event-card">
+                    <h3 class="event-name">Haldi Ceremony</h3>
+                    <div class="event-details">
+                        <p>Join us for the vibrant Haldi ceremony where we'll be smeared with turmeric paste for good luck and glowing skin in this beautiful tradition.</p>
+                    </div>
+                    <div class="event-time">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                        </svg>
+                        <span>10:00 AM - 1:00 PM</span>
+                    </div>
+                    <div class="event-venue">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                        </svg>
+                        <span>Garden Lawn, The Grand Palace, Mumbai</span>
+                    </div>
+                    <a href="#haldi-gallery" class="btn btn-dark">View Photos</a>
+                </div>
+                
+                <!-- Haldi Photos -->
+                <h3 class="event-photos-title">Haldi Moments</h3>
+                <div class="gallery">
+                    <div class="gallery-item" style="animation: photoEntrance 0.8s ease 0.2s forwards;">
+                        <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Haldi Ceremony - Applying turmeric">
+                    </div>
+                    <div class="gallery-item" style="animation: photoEntrance 0.8s ease 0.4s forwards;">
+                        <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Haldi Ceremony - Bride smiling">
+                    </div>
+                    <div class="gallery-item" style="animation: photoEntrance 0.8s ease 0.6s forwards;">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Haldi Ceremony - Family applying haldi">
+                    </div>
+                    <div class="gallery-item" style="animation: photoEntrance 0.8s ease 0.8s forwards;">
+                        <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Haldi Ceremony - Couple with haldi">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Wedding Ceremony with Photos -->
+            <div class="event-with-photos">
+                <div class="event-card" style="animation-delay: 0.2s;">
+                    <h3 class="event-name">Wedding Ceremony</h3>
+                    <div class="event-details">
+                        <p>The moment we've all been waiting for! Witness our union as we tie the knot in a traditional Hindu wedding ceremony surrounded by loved ones.</p>
+                    </div>
+                    <div class="event-time">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                        </svg>
+                        <span>6:00 PM - 11:30 PM</span>
+                    </div>
+                    <div class="event-venue">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                        </svg>
+                        <span>Grand Ballroom, The Grand Palace, Mumbai</span>
+                    </div>
+                    <a href="#wedding-gallery" class="btn btn-dark">View Photos</a>
+                </div>
+                
+                <!-- Wedding Photos -->
+                <h3 class="event-photos-title">Wedding Moments</h3>
+                <div class="gallery">
+                    <div class="gallery-item" style="animation: photoEntrance 0.8s ease 0.2s forwards;">
+                        <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Wedding - Couple at mandap">
+                    </div>
+                    <div class="gallery-item" style="animation: photoEntrance 0.8s ease 0.4s forwards;">
+                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Wedding - Bride portrait">
+                    </div>
+                    <div class="gallery-item" style="animation: photoEntrance 0.8s ease 0.6s forwards;">
+                        <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Wedding - Groom portrait">
+                    </div>
+                    <div class="gallery-item" style="animation: photoEntrance 0.8s ease 0.8s forwards;">
+                        <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Wedding - Couple portrait">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+        <section class="section">
+            <h2 class="section-title">Our Love Story</h2>
+            <div class="video-container" style="animation: fadeInUp 1s ease, videoFloat 8s ease-in-out infinite;">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <!-- Greetings Section -->
+        <section class="greetings">
+            <h2 class="greetings-title">To Our Beloved Family & Friends</h2>
+            <p class="greetings-message">
+                We are overjoyed to share this special moment in our lives with you. Your love and blessings mean the world to us. 
+                As we embark on this beautiful journey together, we look forward to creating countless memories with all of you. 
+                Thank you for being a part of our lives and for joining us in celebrating our union. We can't wait to see you at the wedding!
+            </p>
+            <div>
+                <p>With all our love,</p>
+                <h3 style="font-family: 'Great Vibes', cursive; font-size: clamp(1.8rem, 6vw, 2.5rem); color: var(--navy); margin-top: 1rem;" id="closing-names">Riya & Arjun</h3>
+            </div>
+        </section>
+        
+        <!-- Back Button -->
+        <div class="back-btn-container">
+            <button id="back-btn" class="back-btn">Back to Main Page</button>
+        </div>
+        
+        <footer>
+            <p>© 2023 Riya & Arjun's Wedding. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <script>
+        // DOM Elements
+        const landingPage = document.getElementById('landing-page');
+        const invitationPage = document.getElementById('invitation-page');
+        const brideBtn = document.getElementById('bride-btn');
+        const groomBtn = document.getElementById('groom-btn');
+        const backBtn = document.getElementById('back-btn');
+        const dynamicNames = document.getElementById('dynamic-names');
+        const closingNames = document.getElementById('closing-names');
+        
+        // Bride's Invitation
+        brideBtn.addEventListener('click', function() {
+            landingPage.style.display = 'none';
+            invitationPage.style.display = 'block';
+            dynamicNames.textContent = 'Riya & Arjun';
+            closingNames.textContent = 'Riya & Arjun';
+            document.body.style.backgroundColor = '#FFFFF7';
+            window.scrollTo(0, 0);
+        });
+        
+        // Groom's Invitation
+        groomBtn.addEventListener('click', function() {
+            landingPage.style.display = 'none';
+            invitationPage.style.display = 'block';
+            dynamicNames.textContent = 'Arjun & Riya';
+            closingNames.textContent = 'Arjun & Riya';
+            document.body.style.backgroundColor = '#F7F7FF';
+            window.scrollTo(0, 0);
+        });
+        
+        // Back Button
+        backBtn.addEventListener('click', function() {
+            invitationPage.style.display = 'none';
+            landingPage.style.display = 'flex';
+            document.body.style.backgroundColor = '#FFFFF7';
+            window.scrollTo(0, 0);
+        });
+        
+        // Countdown Timer
+        function updateCountdown() {
+            const weddingDate = new Date('December 12, 2023 00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').innerHTML = days.toString().padStart(2, '0');
+            document.getElementById('hours').innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerHTML = seconds.toString().padStart(2, '0');
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+        
+        // Floating Hearts Animation
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts-container');
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤';
+            
+            // Random position
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = Math.random() * 100 + 'vh';
+            
+            // Random size
+            const size = Math.random() * 15 + 10;
+            heart.style.fontSize = size + 'px';
+            
+            // Random animation duration
+            const duration = Math.random() * 3 + 3;
+            heart.style.animationDuration = duration + 's';
+            
+            heartsContainer.appendChild(heart);
+            
+            // Remove heart after animation completes
+            setTimeout(() => {
+                heart.remove();
+            }, duration * 1000);
+        }
+        
+        // Create hearts periodically
+        setInterval(createHearts, 300);
+        
+        // Scroll animations for gallery items
+        document.addEventListener('DOMContentLoaded', function() {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { 
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            galleryItems.forEach(item => {
+                observer.observe(item);
+            });
+            
+            // Disable parallax on mobile
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                document.querySelector('.parallax').style.backgroundAttachment = 'scroll';
+            }
+        });
+        
+        // Touch event optimizations
+        document.addEventListener('touchstart', function() {}, {passive: true});
+    </script>
+</body>
+</html>
